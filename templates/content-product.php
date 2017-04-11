@@ -42,7 +42,7 @@
 				$finishBrochure = "/wp-content/uploads/2016/12/54206_Pebbletech_Brochure_LR.pdf";
 				// if pebble brilliance, load different brochure in
 				if( is_page(2477) ) {
-					$finishBrochure = "/wp-content/uploads/2016/11/PTI-PebbleBrilliance-Broch-08-15-16_LR.pdf";
+					$finishBrochure = "/wp-content/uploads/2016/12/PTI-PebbleBrilliance-Broch-08-15-16_LR.pdf";
 				}
 				?>
 				<div class="col-md-6"><a class="btn teal-button" href="<?php echo $finishBrochure; ?>" target="_new">Download Brochure</a></div>
