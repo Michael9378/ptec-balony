@@ -1,0 +1,1 @@
+<div class="author-line">posted by <strong><?php echo get_the_author(); ?></strong> in <ul class="list-inline"><?php echo " "; the_category(' '); //wp_get_post_categories(array('title_li' => '')); ?></ul> | <a href="<?php comments_link(); ?>"><?php comments_number('0 Comments', '1 Comment', '% Comments'); ?></a></div>
