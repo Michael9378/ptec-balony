@@ -1,0 +1,175 @@
+// main
+.blog {
+	.wrap {
+		.sidebar-primary {
+			.main {
+				padding-left: 0px;
+			}
+		}
+	}
+}
+.sidebar-primary {
+	.main {
+		padding-right: 40px;
+	}
+}
+
+.sidebar {
+	padding-left: 30px;
+	padding-right: 0px;
+}
+
+// Hero section
+#hero {
+	height: 398px;
+	margin-bottom: 30px;
+
+	//hero image
+	.hero-img {
+		position: absolute;
+		top: 0px;
+	}
+
+	// hero overlay
+	.hero-overlay {
+		position: relative;
+		.uppercase;
+		color: @white;
+		font-size: 80pt;
+		.font900;
+		z-index: 2;
+		top: 100px;
+
+		// hero overlay background
+		span {
+			.overlay-background;
+			display: inline-block;
+			padding-right: 40px;
+			border-top-right-radius: 8px;
+			border-bottom-right-radius: 8px;
+			&:before {
+				content: " ";
+				border-color: rgba(0,0,0,.6);
+				border-style: solid;
+				border-width: 12px 0 12px 9999px;
+				margin-left: -9999px;
+			}
+		}
+	}
+
+	// breadcrumbs
+	#breadcrumbs {
+		.overlay-background;
+		position: relative;
+		z-index: 2;
+		padding: 20px 0px;
+		top: 185px;
+		.uppercase;
+		color: @white;
+		a {
+			color: @white;
+			padding: 0 10px;
+			.font300;
+		}
+		strong {
+			padding-left: 10px;
+		}
+
+	}
+}
+
+// Blog page
+article {
+	padding: 40px 0px;
+	border-bottom: 1px solid @light-grey;
+
+	.post-thumbnail {
+		img {
+			margin-bottom: 30px;
+		}
+	}
+
+	//date time button
+	.updated {
+		text-align: center;
+		background: @dark-teal;
+		.border-radius();
+		color: @white;
+		padding: 5px 10px;
+		.font700;
+		font-size: 16px;
+		display: block;
+		margin: 0 auto;
+		width: 65px;
+		position: relative;
+		left: 10px;
+		span {
+			font-size: 34px;
+			.font300;
+			line-height: 25px;
+		}
+	}
+
+	//comment link
+	.comment-add {
+		display: block;
+		text-align: center;
+		margin-top: 20px;
+		a {
+			color: @white;
+			background: url(../img/comment-add-icon.png);
+			background-position: 18px 16px;
+			padding: 20px 33px;
+			background-repeat: no-repeat;
+			font-size: 20px;
+			&:hover {
+				cursor: pointer;
+				text-decoration: none;
+			}
+		}
+
+	}
+
+	.entry-title {
+		margin-top: 0px;
+		a {
+			color: black;
+			.font900;
+		}
+	}
+
+	.author-line {
+		.list-inline {
+			display: inline-block;
+		}
+		a {
+			color: @teal;
+			text-decoration: underline;
+		}
+	}
+
+	.read-more {
+		a {
+			color: @dark-teal;
+			font-size: 16px;
+			.uppercase;
+			.font700;
+		}
+	}
+}
+
+
+@media(max-width: @screen-lg-min) {
+	#hero {
+		height: 530px;
+		#breadcrumbs {
+			top: 317px;
+		}
+	}
+}
+
+@media (max-width: @screen-md-min) {
+	article {
+		text-align: center;
+	}
+}

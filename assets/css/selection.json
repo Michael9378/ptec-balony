@@ -1,0 +1,71 @@
+{
+	"IcoMoonType": "selection",
+	"icons": [
+		{
+			"icon": {
+				"paths": [
+					"M87.872 992.537c42.813-18.872 448.729-153.949 821.969-176.314 8.042-31.449 48.93-136.995 56.445-165.656-387.222 27.613-702.1 143.29-828.614 201.824l-49.8 140.146z",
+					"M693.872 31.47c-66.925 31.106-259.659 179.979-363.459 258.091 126.336-42.114 429.857-109.389 585.374-113.054-48.581-34.25-185.048-127.042-221.915-145.037z",
+					"M508.995 629.599c114.629-41.416 349.299-90.688 498.358-99.6 17.296-52.773 35.648-91.038 35.648-91.038l199.379-19.92c0 0-151.496-122.493-297.581-222.265-0 0-376.741 378.481-435.803 432.822z",
+					"M152.523 811.681c118.65-122.144 545.534-516.181 545.534-516.181-222.094 51.896-453.969 122.315-536.8 160.059l-124.582 128.083c104.149-22.187 137.694-26.558 213.88-37.744l-98.032 265.784z"
+				],
+				"attrs": [],
+				"isMulticolor": false,
+				"width": 1279,
+				"grid": 0,
+				"tags": [
+					"zillow"
+				]
+			},
+			"attrs": [],
+			"properties": {
+				"order": 1,
+				"id": 0,
+				"prevSize": 32,
+				"code": 58880,
+				"name": "zillow"
+			},
+			"setIdx": 0,
+			"setId": 3,
+			"iconIdx": 0
+		}
+	],
+	"height": 1024,
+	"metadata": {
+		"name": "icomoon"
+	},
+	"preferences": {
+		"showGlyphs": true,
+		"showQuickUse": true,
+		"showQuickUse2": true,
+		"showSVGs": true,
+		"fontPref": {
+			"prefix": "icon-",
+			"metadata": {
+				"fontFamily": "icomoon"
+			},
+			"metrics": {
+				"emSize": 1024,
+				"baseline": 6.25,
+				"whitespace": 50
+			},
+			"embed": false,
+			"resetPoint": 58880
+		},
+		"imagePref": {
+			"prefix": "icon-",
+			"png": true,
+			"useClassSelector": true,
+			"color": 4473924,
+			"bgColor": 16777215,
+			"classSelector": ".icon",
+			"autoHost": true
+		},
+		"historySize": 100,
+		"showCodes": false,
+		"quickUsageToken": {
+			"UntitledProject": "M2Y3YmE2ODcxZTI5NjE2MDM2OGQyZmM0MzUwZGIyMGYjMSMxNDQxMzg0MjIwIyMj"
+		},
+		"imageHostingName": false
+	}
+}

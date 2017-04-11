@@ -1,0 +1,149 @@
+.page-template-template-product {
+	#hero {
+		.hero-overlay {
+			font-size: 70px;
+			span {
+				.border-radius(8px);
+				padding-left: 40px;
+				background: rgba(23, 138, 207, 0.6);
+				&:before {
+					content: none;
+				}
+			}
+		}
+		#breadcrumbs {
+			top: 320px;
+		}
+	}
+
+	//Available colors
+	.available-colors {
+		border-right: 1px solid @light-grey;
+	}
+
+	// product sidebar
+	.product-sidebar {
+		padding-left: 50px;
+		.widget {
+			padding: 20px 0;
+			border-bottom: 1px solid @light-grey;
+			&:first-child {
+				padding-top: 0;
+			}
+			.widget-title {
+				.uppercase;
+			}
+			ul.list-unstyled {
+				color: @teal;
+				strong {
+					.uppercase;
+				}
+				a {
+					color: @teal;
+				}
+			}
+		}
+	}
+
+	//product swatches
+	.single-product-swatch {
+		margin: 10px 0;
+		a {
+			.swatch-overlay {
+				position: absolute;
+				height: 132px;
+				width: 132px;
+				top: 0;
+				left: 16px;
+				padding: 10px;
+				background: rgba(23, 138, 207, 0.6);
+				border-radius: 15px;
+				color: white;
+				display: none;
+			}
+			&:hover {
+				.swatch-overlay {
+					display: inherit;
+				}
+			}
+		}
+	}
+
+	// product modal
+	.color-popout {
+		.modal-header {
+			border-bottom: none;
+			.modal-title {
+				.uppercase;
+				.font900;
+				font-size: 32px;
+			}
+			.close {
+				color: @white;
+				background: @teal;
+				opacity: 1.0;
+				border-radius: 15px;
+				text-shadow: none;
+				padding: 5px 9px;
+				&:hover {
+					background: @dark-teal;
+				}
+			}
+		}
+
+		.modal-body {
+			.product-gallery {
+				margin-bottom: 30px;
+				.carousel-control.left, .carousel-control.right {
+					background-image: none;
+					opacity: 1.0;
+					&:hover {
+						.glyphicon {
+							background: @dark-teal;
+						}
+					}
+					.glyphicon {
+						background: @teal;
+						padding-top: 10px;
+						border-radius: 20px;
+						padding: 6px 7px 6px 4px;
+						width: auto;
+						height: auto;
+					}
+				}
+				.carousel-control.right {
+					.glyphicon {
+						padding: 5px 6px 8px 6px;
+					}
+				}
+			}
+
+			.product-description {
+				img {
+					margin-right: 20px;
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+}
+
+@media(max-width: @screen-lg-min) {
+	.page-template-template-product {
+		#hero {
+			height: 528px;
+			#breadcrumbs {
+				top: 368px;
+			}
+		}
+	}
+}
+
+@media(max-width: @screen-sm-min) {
+	.available-colors {
+		text-align: center;
+	}
+	.swatch-overlay {
+		left: 122px;
+	}
+}

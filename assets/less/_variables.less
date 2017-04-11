@@ -1,0 +1,76 @@
+// Grid settings
+// -------------------------
+
+@main-sm-columns:       @grid-columns;
+@sidebar-sm-columns:    4;
+@grid-float-breakpoint: 1200px;
+
+
+// Brand colors
+// -------------------------
+
+@brand-primary:         #27ae60;
+@black:					#000;
+@light-grey:			#9ea4a8;
+@dark-grey:				#202427;
+@white:					#fff;
+@teal:					#01a1ce;
+@teal-text:				#3890c0;
+@dark-teal:				#007fa3;
+@dark-white:			#efefef;
+
+
+// Glyphicons path
+// -------------------------
+
+@icon-font-path:        "../vendor/bootstrap/fonts/";
+
+// Font import
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic);
+
+// Font sizes
+.font300 {font-weight: 300;}
+.font400 {font-weight: 400;}
+.font700 {font-weight: 700;}
+.font900 {font-weight: 900;}
+
+// Uppercase
+.uppercase {
+	text-transform: uppercase;
+}
+
+// Underlined text
+.underline {
+	text-decoration: underline;
+}
+
+// white uppercase links
+.white-links {
+	.uppercase;
+	color: @white;
+}
+
+// blue text
+.blue-text {
+	color: @teal-text;
+	.font400;
+}
+
+// transparent black overlay background
+.overlay-background {
+	background: rgba(0, 0, 0, 0.6);
+}
+
+// Border radius function
+.border-radius(@radius 10px;) {
+  	-webkit-border-radius: @radius;
+ 	-moz-border-radius: @radius;
+     border-radius: @radius;
+}
+
+// footer link
+.footer-link {
+	.uppercase;
+	color: @dark-teal;
+	.font700;
+}

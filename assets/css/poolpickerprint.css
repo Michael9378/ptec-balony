@@ -1,0 +1,50 @@
+/* carefully hide everything that isnt the printable section */
+
+#shiftnav-toggle-main, .shiftnav-shiftnav-main, #hero, header, footer, main>.container {
+	display: none;
+}
+
+#recommendedAddOns, #whatsNext { display: none!important; }
+
+#printableResults { display: block!important; }
+
+/* start actually styling things */
+
+h1, h2, h3, h4, h5 {
+    margin: 10px 0;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.half {
+    display: inline-block;
+    padding: 0 1em;
+    width: 49%;
+    text-align: left;
+}
+
+.half:first-child {
+    vertical-align: top;
+    text-align: right;
+}
+
+.half h2 {
+    font-weight: bold;
+}
+
+.print-header {margin-bottom: 1em;}
+
+.media-left {
+    display: none;
+}
+
+h4.media-heading {
+    font-size: 14px;
+}

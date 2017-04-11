@@ -1,0 +1,36 @@
+// Captions
+.wp-caption {
+  &:extend(.thumbnail all);
+}
+
+.wp-caption-text {
+  &:extend(.thumbnail .caption all);
+}
+
+// Gallery shortcode
+.gallery-row {
+  padding: (@line-height-computed / 2) 0;
+}
+
+// Twitter Banner
+#twitterBanner {
+	border-top: 1px solid @dark-white;
+	border-bottom: 1px solid @dark-white;
+	font-size: 17pt;
+	a {
+		color: @teal;
+	}
+	.inner-banner {
+		margin-top: 2px;
+		margin-bottom: 2px;
+		background: @dark-white;
+		padding: 25px 10px;
+		.cycle-slideshow {
+			min-height: 75px;
+			.tweet-element {
+				white-space: normal;
+				padding-top: 5px;
+			}
+		}
+	}
+}
