@@ -34,7 +34,7 @@ function roots_scripts() {
     'cycle2'                => '/assets/js/vendor/jquery.cycle2.min.js',
     'cycle2-carousel'       => '/assets/js/vendor/jquery.cycle2.carousel.js',
     'parsley'               => '//cdnjs.cloudflare.com/ajax/libs/parsley.js/2.4.3/parsley.min.js',
-    'google-maps'           => '//maps.googleapis.com/maps/api/js?key=AIzaSyBxs3Iab6XLR5jP4mC75fsE3UFf3KJsIJU',
+    'google-maps'           => '//maps.googleapis.com/maps/api/js?key=AIzaSyBxs3Iab6XLR5jP4mC75fsE3UFf3KJsIJU'
   );
 
   wp_enqueue_style('roots_css', get_template_directory_uri() . $assets['css'], false, null);

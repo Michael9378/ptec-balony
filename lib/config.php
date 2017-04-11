@@ -61,7 +61,7 @@ function roots_display_sidebar() {
         'template-pool-picker.php',
         'template-product.php',
         'template-no-title.php',
-        'template-find-a-builder.php',
+        'template-find-a-builder.php'
       )
     );
     $display = apply_filters('roots/display_sidebar', $sidebar_config->display);
