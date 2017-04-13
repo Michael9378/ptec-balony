@@ -923,7 +923,12 @@ find_a_builder: {
       }
 
       function getBuilders() {
+        // before serializing, make sure we grab disabled fields
+        var disables = $form.find("input[disabled]");
+        disables.attr("disabled", false);
         var formData = $form.serialize();
+        // redisable the values.
+        disables.attr("disabled", true);
 
         var data = {
           'action': 'get_builders',
@@ -938,6 +943,10 @@ find_a_builder: {
         });
 
         request.done(function( response ) {
+          console.log(response);
+          console.log("Break");
+          return false;
+
           builders = response.table.records.record;
           if (builders) {
             if(!Array.isArray(builders)) {
@@ -1046,26 +1055,6 @@ find_a_builder: {
       //   alert( "Request failed: " + textStatus );
       // });
 
-
-      // show/hide fields on builder type change
-      $type.change(function (e) {
-        e.preventDefault();
-        var type = $(this).val();
-        if ( type === 'Builder' ) {
-          $remodels.prop('checked', false ).attr('disabled', false);
-          $construction.prop('checked', true ).attr('disabled', true);
-          $residentials.prop('checked', false );
-        } else if ( type === 'Remodel' ) {
-          $remodels.prop('checked', true ).attr('disabled', true);
-          $construction.prop('checked', false ).attr('disabled', false);
-          $residentials.prop('checked', false );
-        } else {
-          $remodels.prop('checked', false ).attr('disabled', false);
-          $construction.prop('checked', false ).attr('disabled', false);
-          $residentials.prop('checked', true );
-        }
-      });
-
       // get counties on state change
       // $state.change(function (e) {
       //   e.preventDefault();
@@ -1116,6 +1105,8 @@ find_a_builder: {
       // form submission
       $form.submit(function (e) {
         e.preventDefault();
+
+        // a service is selected, move on.
         if ($form.parsley().isValid()) {
           clearMarkers();
           $btn.button('loading');

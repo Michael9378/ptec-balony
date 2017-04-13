@@ -386,44 +386,96 @@ add_action( 'wp_ajax_get_builders', 'get_builders' );
 add_action( 'wp_ajax_nopriv_get_builders', 'get_builders' );
 
 function get_builders() {
+
   $url = '';
   $services = '';
+  $types = '';
+  $query = '{34.EX.1}'; // make sure returned builders are admin approved
+
   $data = array();
   parse_str( $_POST['form_data'], $data ) ;
 
-  if( is_array( $data['Services'] ) ):
+  // if services are selected, we will need to filter by these services
+  if( is_array( $data['Services'] ) ){
     foreach ($data['Services'] as $service):
       switch ($service) {
         case 'Residential Pools':
-          $services .= 'AND{32.EX.\'true\'}';
-          break;
-        case 'New Construction':
-          $services .= 'AND{30.EX.\'true\'}';
+          $services .= '{32.EX.\'true\'}AND';
           break;
         case 'Backend Design Services':
-          $services .= 'AND{28.EX.\'true\'}';
+          $services .= '{28.EX.\'true\'}AND';
           break;
         case 'Commercial Pools':
-          $services .= 'AND{29.EX.\'true\'}';
-          break;
-        case 'Remodels':
-          $services .= 'AND{31.EX.\'true\'}';
+          $services .= '{29.EX.\'true\'}AND';
           break;
       }
     endforeach;
-  endif;
+    // check for type to add service for remodel or new construction
+    if( $_POST['Type'] == 'Applicator' ){
+      // selected services are services from above.
+      // need to add builder and remodel seperate
+      $sel_services = $services;
+      $services .= $sel_services.'{30.EX.\'true\'}OR'; // new construction
+      $services .= $sel_services.'{31.EX.\'true\'}'; // remodels
+    }
+    elseif( $_POST['Type'] == 'Remodels' ){
+      // if we are Remodels, return remodels
+      $services .= '{31.EX.\'true\'}'; // remodels
+    }
+    else {
+      // we are new construction.
+      $services .= '{30.EX.\'true\'}'; // new construction
+    }
+  }
+  else{
+    // no services were selected.
+    if( $_POST['Type'] == 'Applicator' ){
+      // if we are applicator, return any applicator with any service
+      $services = '{28.EX.\'true\'}OR{29.EX.\'true\'}OR{30.EX.\'true\'}OR{31.EX.\'true\'}OR{32.EX.\'true\'}';
+    }
+    elseif( $_POST['Type'] == 'Remodels' ){
+      // if we are Remodels, return all rows with 'Remodels' as true
+      $services .= '{31.EX.\'true\'}'; // remodels
+    }
+    else {
+      // if we are Construction, return all rows with 'Construction' as true
+      $services .= '{30.EX.\'true\'}'; // new construction
+    }
+  }
+  // wrap in ( )
+  $query .= "AND(" . $services . ")";
+  // services are all captured.
+  // query is admin_approved and services
 
-  if( $data['Country'] !== 'USA' ) {
-    $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query={36.EX.'. urlencode($data["Country"]) .'}AND{34.EX.1}&clist=a&slist=13&fmt=structured';
-  } else if( $data['Type'] == 'Builder' ) {
-    $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query=({21.EX.Builder}AND{19.EX.'. $data["State"] .'}'. $services .'AND{34.EX.1})OR({21.EX.Builder/Applicator}AND{19.EX.'. $data["State"] .'}'. $services .'AND{34.EX.1})OR({21.EX.Applicator}AND{15.CT.'. urlencode($data["County"]) .'}'. $services .'AND{34.EX.1})&clist=a&slist=13&fmt=structured';
-  } 
-  else if( $data['Type'] == 'Remodel' ) {
-    $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query=({21.EX.Builder}AND{19.EX.'. $data["State"] .'}'. $services .'AND{34.EX.1})OR({21.EX.Builder/Applicator}AND{19.EX.'. $data["State"] .'}'. $services .'AND{34.EX.1})OR({21.EX.Applicator}AND{15.CT.'. urlencode($data["County"]) .'}'. $services .'AND{34.EX.1})OR{21.EX.Certified%20Repair%20Agent}AND{15.CT.'. urlencode($data["County"]) .'}'. $services .'AND{19.EX.'. $data["State"] .'}AND{34.EX.1}&clist=a&slist=13&fmt=structured';
+  // if type is applicator, filter out anyone that isnt applicator, applicator/builder, and certified repair
+  if( $_POST['Type'] == 'Applicator' ){
+    // 21.EX.TYPE_OF_BUILDER_LITERAL
+    /* 
+    Builder Types
+      Applicator
+      Builder/Applicator
+      Builder
+      Certified Repair Agent
+    */
+    $query .= 'AND({21.EX.Applicator}OR{21.EX.Builder/Applicator}OR{21.EX.Certified Repair Agent})';
+  }
+
+  // if country is not USA, get rid of all previous filters and just get all builders in country
+  if( $_POST['Country'] !== 'USA' ) {
+    // if country is not USA, query for country ( {36.EX.LITERAL_COUNTRY} ) and admin approved ( {34.EX.1} )
+    // ignore previously built query
+    $query = '{34.EX.1}AND{36.EX.'. $_POST["Country"] .'}';
   }
   else {
-    $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query={21.EX.Applicator}AND{15.CT.'. urlencode($data["County"]) .'}'. $services .'AND{19.EX.'. $data["State"] .'}AND{34.EX.1}OR{21.EX.Builder/Applicator}AND{15.CT.'. urlencode($data["County"]) .'}'. $services .'AND{19.EX.'. $data["State"] .'}AND{34.EX.1}OR{21.EX.Certified%20Repair%20Agent}AND{15.CT.'. urlencode($data["County"]) .'}'. $services .'AND{19.EX.'. $data["State"] .'}AND{34.EX.1}&clist=a&slist=13&fmt=structured';
+    // add passed county to query
+    $query .= 'AND{15.EX.' . $_POST["County"] . '}'
   }
+
+  $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query=' . $query . '&clist=a&slist=13&fmt=structured';
+
+  wp_die( $url );
+/*
+  $url = urlencode($url);
 
   $curl = curl_init();
 
@@ -454,6 +506,7 @@ function get_builders() {
     $json = json_encode($xml);
     wp_die( $json );
   }
+  */
 }
 
 add_action( 'wp_ajax_get_ticket', 'get_ticket' );

@@ -85,19 +85,6 @@
 							</select>
 				    </div>
 				  </div>
-				  <!-- <div class="form-group" id="locationRow">
-				    <label class="col-sm-2 control-label">Location</label>
-				    <div class="col-sm-3">
-				      <select class="form-control" id="State" name="State" data-parsley-required="true">
-							  <option value="">State</option>
-							</select>
-				    </div>
-				    <div class="col-sm-3 show-applicator show-remodel show-builder">
-				      <select class="form-control" id="County" name="County" data-parsley-required="true">
-							  <option value="">County</option>
-							</select>
-				    </div>
-				  </div> -->
 				  <div class="form-group" id="locationRow">
 				    <label class="col-sm-2 control-label">Zip Code</label>
 				    <div class="col-sm-3">
@@ -116,22 +103,16 @@
 				    </div>
 				  </div>
 				  <div class="form-group" id="servicesRow">
-				  	<label class="col-sm-2 control-label">Services</label>
+				  	<label class="col-sm-2 control-label">Filter by Services</label>
 				    <div class="col-sm-10">
 				      <label class="checkbox-inline">
 							  <input type="checkbox" name="Services[]" id="residentialPools" value="Residential Pools"> Residential Pools
 							</label>
 							<label class="checkbox-inline">
-							  <input type="checkbox" name="Services[]" id="newConstruction" value="New Construction" checked disabled> New Construction
-							</label>
-							<label class="checkbox-inline">
-							  <input type="checkbox" name="Services[]" id="backendDesignServices" value="Backend Design Services"> Backyard Design Services
-							</label>
-							<label class="checkbox-inline">
 							  <input type="checkbox" name="Services[]" id="commercialPools" value="Commercial Pools"> Commercial Pools
 							</label>
 							<label class="checkbox-inline">
-							  <input type="checkbox" name="Services[]" id="Remodels" value="Remodels"> Remodels
+							  <input type="checkbox" name="Services[]" id="backendDesignServices" value="Backend Design Services"> Backyard Design Services
 							</label>
 				    </div>
 			    </div>
