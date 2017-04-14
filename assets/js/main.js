@@ -467,30 +467,6 @@ find_a_builder: {
         return uniqueBuilders;
       }
 
-      // filter locations based on services they offer
-      function filterByServices(builders){
-        /*
-        "Backyard Design"   : builder.f[11],
-        "Commercial Pools"  : builder.f[12],
-        "New Construction"  : builder.f[13],
-        "Remodels"          : builder.f[14],
-        "Residential Pools" : builder.f[15],
-        */
-        // get selected services
-        var selectedServices = [ $("input#backyardDesign").is(":checked"), $("input#commercialPools").is(":checked"), $("input#newConstruction").is(":checked"), $("input#Remodels").is(":checked"), $("input#residentialPools").is(":checked") ];
-        var returnBuilders = [];
-        for( var j = 0; j < builders.length; j++ ) {
-          for( var i = 0; i < selectedServices.length; i++ ) {
-            if( selectedServices[i] && builders[j].f[i+11] ) {
-              // add this builder to the return list and break out of services check.
-              returnBuilders.push( builders[j] );
-              break;
-            }
-          }
-        }
-        return returnBuilders;
-      }
-
       // add markers to map
       function addMarkers(locations) {
         infoWindow = new google.maps.InfoWindow();
@@ -848,6 +824,7 @@ find_a_builder: {
         elite_builders = [];
         certified_builders = [];
         registered_builders = [];
+        builder_applicator = [];
 
         // clear html results
         $('.returned-results').html('');
@@ -943,10 +920,6 @@ find_a_builder: {
         });
 
         request.done(function( response ) {
-          console.log(response);
-          console.log("Break");
-          return false;
-
           builders = response.table.records.record;
           if (builders) {
             if(!Array.isArray(builders)) {
@@ -955,14 +928,6 @@ find_a_builder: {
             // filter duplicate builders
             //console.log("Total builders returned from database call: " + builders.length);
             builders = filterDuplicateBuilders(builders);
-            // filter by services
-            var noServices = 0;
-            for( var i = 0; i < builders.length; i++) {
-              if( !(builders[i].f[11]+builders[i].f[12]+builders[i].f[13]+builders[i].f[14]+builders[i].f[15]) )
-                noServices++;
-            }
-            //console.log("Builders with no services listed: " + noServices);
-            builders = filterByServices(builders);
 
             getLocations(builders);
           } else {

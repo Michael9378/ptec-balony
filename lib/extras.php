@@ -411,16 +411,16 @@ function get_builders() {
       }
     endforeach;
     // check for type to add service for remodel or new construction
-    if( $_POST['Type'] == 'Applicator' ){
+    if( $data['Type'] == 'Applicator' ){
       // selected services are services from above.
       // need to add builder and remodel seperate
       $sel_services = $services;
       $services .= $sel_services.'{30.EX.\'true\'}OR'; // new construction
-      $services .= $sel_services.'{31.EX.\'true\'}'; // remodels
+      $services .= $sel_services.'{31.EX.\'true\'}'; // Remodel
     }
-    elseif( $_POST['Type'] == 'Remodels' ){
-      // if we are Remodels, return remodels
-      $services .= '{31.EX.\'true\'}'; // remodels
+    elseif( $data['Type'] == 'Remodel' ){
+      // if we are Remodel, return Remodel
+      $services .= '{31.EX.\'true\'}'; // Remodel
     }
     else {
       // we are new construction.
@@ -429,13 +429,13 @@ function get_builders() {
   }
   else{
     // no services were selected.
-    if( $_POST['Type'] == 'Applicator' ){
+    if( $data['Type'] == 'Applicator' ){
       // if we are applicator, return any applicator with any service
       $services = '{28.EX.\'true\'}OR{29.EX.\'true\'}OR{30.EX.\'true\'}OR{31.EX.\'true\'}OR{32.EX.\'true\'}';
     }
-    elseif( $_POST['Type'] == 'Remodels' ){
-      // if we are Remodels, return all rows with 'Remodels' as true
-      $services .= '{31.EX.\'true\'}'; // remodels
+    elseif( $data['Type'] == 'Remodel' ){
+      // if we are Remodel, return all rows with 'Remodel' as true
+      $services .= '{31.EX.\'true\'}'; // Remodel
     }
     else {
       // if we are Construction, return all rows with 'Construction' as true
@@ -448,7 +448,7 @@ function get_builders() {
   // query is admin_approved and services
 
   // if type is applicator, filter out anyone that isnt applicator, applicator/builder, and certified repair
-  if( $_POST['Type'] == 'Applicator' ){
+  if( $data['Type'] == 'Applicator' ){
     // 21.EX.TYPE_OF_BUILDER_LITERAL
     /* 
     Builder Types
@@ -461,21 +461,19 @@ function get_builders() {
   }
 
   // if country is not USA, get rid of all previous filters and just get all builders in country
-  if( $_POST['Country'] !== 'USA' ) {
+  if( $data['Country'] !== 'USA' ) {
     // if country is not USA, query for country ( {36.EX.LITERAL_COUNTRY} ) and admin approved ( {34.EX.1} )
     // ignore previously built query
-    $query = '{34.EX.1}AND{36.EX.'. $_POST["Country"] .'}';
+    $query = '{34.EX.1}AND{36.EX.'. $data["Country"] .'}';
   }
   else {
     // add passed county to query
-    $query .= 'AND{15.EX.' . $_POST["County"] . '}'
+    $query .= 'AND{15.EX.' . $data["County"] . '}';
   }
 
-  $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query=' . $query . '&clist=a&slist=13&fmt=structured';
+  $query = urlencode($query);
 
-  wp_die( $url );
-/*
-  $url = urlencode($url);
+  $url = 'https://pebbletec.quickbase.com/db/bkgwpj2wi?a=API_DoQuery&apptoken=cxdg5psdqnwkygdp6zwgccy6tjr3&query=' . $query . '&clist=a&slist=13&fmt=structured';
 
   $curl = curl_init();
 
@@ -506,7 +504,7 @@ function get_builders() {
     $json = json_encode($xml);
     wp_die( $json );
   }
-  */
+  
 }
 
 add_action( 'wp_ajax_get_ticket', 'get_ticket' );
