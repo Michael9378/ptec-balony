@@ -468,7 +468,7 @@ function get_builders() {
   }
   else {
     // add passed county to query
-    $query .= 'AND{15.EX.' . $data["County"] . '}';
+    $query .= 'AND{19.EX.' . $data["State"] . '}';
   }
 
   $query = urlencode($query);
