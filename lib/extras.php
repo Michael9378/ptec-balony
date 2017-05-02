@@ -413,10 +413,7 @@ function get_builders() {
     // check for type to add service for remodel or new construction
     if( $data['Type'] == 'Applicator' ){
       // selected services are services from above.
-      // need to add builder and remodel seperate
-      $sel_services = $services;
-      $services .= $sel_services.'{30.EX.\'true\'}OR'; // new construction
-      $services .= $sel_services.'{31.EX.\'true\'}'; // Remodel
+      // do not specify whether they should have remodels or not, only pull on selected services from above
     }
     elseif( $data['Type'] == 'Remodel' ){
       // if we are Remodel, return Remodel
